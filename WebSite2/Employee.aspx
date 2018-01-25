@@ -4,7 +4,7 @@
     
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    
+    <section>
     <section style="width: 25%; float: left;" >
             <p>
         
@@ -69,9 +69,14 @@
                 <asp:Label ID="lblManagerID" runat="server" Text="Manager ID*: " Width="100px"></asp:Label>
                 <asp:TextBox ID="txtManagerID" runat="server" CssClass="shortInputText"></asp:TextBox>
             </p>
+            <p >
+                <asp:Label ID="lblProjectSelection" runat="server" Text="Project: " Width="100px"></asp:Label>
+                <asp:DropDownList ID="projectDropDown" runat="server" >
+                </asp:DropDownList>
+            </p>
                 <p >
-                    <asp:Label ID="lblProjectSelection" runat="server" Text="Projects: " Width="100px"></asp:Label>
-                    <asp:DropDownList ID="DropDownList1" runat="server">
+                    <asp:Label ID="lblSkillSelection" runat="server" Text="Skills: " Width="100px"></asp:Label>
+                    <asp:DropDownList ID="skillDropDown" runat="server">
                     </asp:DropDownList>
             </p>
             <p>
@@ -114,7 +119,18 @@
                 </Columns>
             </asp:GridView>
             </aside>
-        
-        
+            
+        </section>
     </asp:Content>
+
+
+
+
+
+
+
+
+
+
+
 

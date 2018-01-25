@@ -14,29 +14,48 @@ public partial class Default3 : System.Web.UI.Page
     {
         //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('Please enter your name')", true);
         
+        
     }
 
     protected void btnCommitProject_Click(object sender, EventArgs e)
     {
-        Project newProject = new Project(txtProjectName.Text, txtProjectDescription.Text, "John Morrissey", System.DateTime.Now);
-
-        try
+        Boolean ensureDB = true;
+        
+        if (checkDB(txtProjectName.Text, "ProjectName") == false)
         {
-            System.Data.SqlClient.SqlConnection sqlc = connectToDB();
-
-            //Creates the sql insert statement 
-            System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
-            insert.Connection = sqlc;
-
-            insert.CommandText += "insert into [dbo].[PROJECT] values ('" + txtProjectName.Text + "','" + txtProjectDescription + "','" + newProject.LastUpdatedBy
-                + "','" + newProject.LastUpdated + "')";
-            insert.ExecuteNonQuery();
-            sqlc.Close();
+            ensureDB = false;
+            lblAlert.Text += "This project name already exists.";
         }
-        catch (Exception)
+        if (checkDB(txtProjectDescription.Text, "ProjectDescription") == false)
         {
-
+            ensureDB = false;
+            lblAlert.Text += "This project description already exists.";
         }
+
+        if (ensureDB == true)
+        {
+            Project newProject = new Project(txtProjectName.Text, txtProjectDescription.Text, (string)Session["user"], System.DateTime.Now);
+
+            try
+            {
+                System.Data.SqlClient.SqlConnection sqlc = connectToDB();
+
+                //Creates the sql insert statement 
+                System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
+                insert.Connection = sqlc;
+
+                insert.CommandText += "insert into [dbo].[PROJECT] values ('" + newProject.ProjectName + "','" + newProject.ProjectDescription + "','" + newProject.LastUpdatedBy
+                    + "','" + newProject.LastUpdated + "')";
+                lblAlert.Text += insert.CommandText;
+                insert.ExecuteNonQuery();
+                sqlc.Close();
+            }
+            catch (Exception c)
+            {
+                lblAlert.Text += c;
+            }
+        }
+
     }
 
     protected void btnClearProject_Click(object sender, EventArgs e)
@@ -72,11 +91,27 @@ public partial class Default3 : System.Web.UI.Page
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
             select.Connection = sqlc;
 
-            select.CommandText += "select [" + colName + "] FROM "
-        }
-        catch ()
-        {
+            select.CommandText += "SELECT COUNT (*) [" + colName + "] FROM [DBO].[PROJECT] WHERE [" + colName
+                + "] = '" + a + "'";
+            lblAlert.Text += select.CommandText;
 
+            int i = (int)select.ExecuteScalar();
+            sqlc.Close();
+            
+            if (i == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
+        catch (Exception c)
+        {
+            lblAlert.Text += c;
+            return false;
         }
     }
 }
