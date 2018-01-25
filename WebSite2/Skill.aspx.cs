@@ -9,7 +9,7 @@ public partial class Default2 : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        findMaxID();
     }
 
     protected void btnCommitSkill_Click(object sender, EventArgs e)
@@ -105,6 +105,30 @@ public partial class Default2 : System.Web.UI.Page
         {
             lblAlert.Text += c;
             return false;
+        }
+    }
+
+    private int findMaxID()
+    {
+        try
+        {
+            System.Data.SqlClient.SqlConnection sqlc = connectToDB();
+
+            //Creates the sql select statement
+            System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
+            select.Connection = sqlc;
+
+            select.CommandText += "SELECT MAX(SKILLID) FROM [DBO].[SKILL]";
+
+            int i = (int)select.ExecuteScalar();
+            lblAlert.Text += i;
+            sqlc.Close();
+            return i;
+        }
+        catch (Exception c)
+        {
+            lblAlert.Text += c;
+            return -1;
         }
     }
 }

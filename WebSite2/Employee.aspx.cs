@@ -12,34 +12,36 @@ using System.Configuration;
 
 public partial class EmployeeDefault : System.Web.UI.Page
 {
-    public static int count = 0;
-    public static string[,] returnArray = new string[1000, 2];
+    private static int selectSkill;
+    private static int selectProject;
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //Set the variables for the users selections
+        selectSkill = skillDropDown.SelectedIndex - 1;
+        selectProject = projectDropDown.SelectedIndex - 1;
+
         //Select from the database and add that to the drop down
         projectDropDown.Items.Clear();
+        projectDropDown.Items.Add("(No Project)");
         skillDropDown.Items.Clear();
+        skillDropDown.Items.Add("(No Project)");
         selectFromDB("SKILL","SkillName", projectDropDown);
-        selectFromDB("PROJECT", "ProjectName", skillDropDown);
-        
-
-        
+        selectFromDB("PROJECT", "ProjectName", skillDropDown); 
     }
-
-
-
-
-
 
     protected void btnCommitEmployee_Click(object sender, EventArgs e)
     {
 
+        Employee newEmployee = new Employee(txtFirstName.Text, txtLastName.Text, txtMiddleInitial.Text,
+            txtHouseNum.Text, txtStreet.Text, txtCity.Text, txtState.Text, txtCountry.Text, txtZip.Text,
+            DateTime.Parse(txtDateOfBirth.Text), DateTime.Parse(txtHireDate.Text), DateTime.Parse(txtTerminationDate.Text),
+            double.Parse(txtSalary.Text), int.Parse(txtManagerID.Text), (string)Session["user"], System.DateTime.Now);
     }
 
     protected void btnClear_Click(object sender, EventArgs e)
     {
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Fields are cleared')", true);
+        //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Fields are cleared')", true);
         txtFirstName.Text = "";
         txtLastName.Text = "";
         txtMiddleInitial.Text = "";
@@ -59,7 +61,9 @@ public partial class EmployeeDefault : System.Web.UI.Page
 
     protected void btnExit_Click(object sender, EventArgs e)
     {
+        
         //Exits the web application
+
     }
 
     private void selectFromDB(string table, string column, Control cntrl)
@@ -108,6 +112,25 @@ public partial class EmployeeDefault : System.Web.UI.Page
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertmessage", "alert('There was an error connecting to the Database')", true);
             return null;
         }
+    }
+
+    private void insertBridge(int id, Employee person)
+    {
+        //try
+        //{
+        //    //Connect to the DB
+        //    System.Data.SqlClient.SqlConnection sqlc = connectToDB();
+
+        //    //Creates a new sql insert statement to insert into the bridge table
+        //    System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
+        //    insert.Connection = sqlc;
+        //    insert.CommandText = "insert into [dbo].[EMPLOYEEPROJECT] values ('" + 
+        //}
+        //catch (Exception c)
+        //{
+            
+        //    errorMessage.Text += c;
+        //}
     }
 
 

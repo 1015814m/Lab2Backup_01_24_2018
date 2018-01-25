@@ -10,12 +10,12 @@
         
             <br />
                 <asp:Label ID="lblFirstName" runat="server" Text="First Name: " Width="100px" ></asp:Label>
-                <asp:TextBox ID="txtFirstName" runat="server" CssClass="longInputText"></asp:TextBox>
+                <asp:TextBox ID="txtFirstName" runat="server" CssClass="longInputText" required=""></asp:TextBox>
         
             </p>
             <p>
                 <asp:Label ID="lblLastName" runat="server" Text="Last Name: " Width="100px"></asp:Label>
-                <asp:TextBox ID="txtLastName" runat="server" CssClass="longInputText"></asp:TextBox>
+                <asp:TextBox ID="txtLastName" runat="server" CssClass="longInputText" required=""></asp:TextBox>
             </p>
             <p>
                 <asp:Label ID="lblMiddleInitial" runat="server" Text="Middle Initial*: " Width="100px"></asp:Label>
@@ -23,21 +23,21 @@
             </p>
             <p>
                 <asp:Label ID="lblDateOfBirth" runat="server" Text="Date of Birth: " Width="100px"></asp:Label>
-                <asp:TextBox ID="txtDateOfBirth" placeholder="YYYY-MM-DD" runat="server" CssClass="mediumInputText"></asp:TextBox>
+                <asp:TextBox ID="txtDateOfBirth" placeholder="YYYY-MM-DD" runat="server" CssClass="mediumInputText" required=""></asp:TextBox>
             </p>
             <p>
                 &nbsp;</p>
             <p>
                 <asp:Label ID="lblHouseNum" runat="server" Text="House Number: " Width="100px"></asp:Label>
-                <asp:TextBox ID="txtHouseNum" runat="server" CssClass="mediumInputText"></asp:TextBox>
+                <asp:TextBox ID="txtHouseNum" runat="server" CssClass="mediumInputText" required=""></asp:TextBox>
             </p>
             <p>
                 <asp:Label ID="lblStreet" runat="server" Text="Street: " Width="100px"></asp:Label>
-                <asp:TextBox ID="txtStreet" runat="server" CssClass="longInputText"></asp:TextBox>
+                <asp:TextBox ID="txtStreet" runat="server" CssClass="longInputText" required=""></asp:TextBox>
             </p>
             <p>
                 <asp:Label ID="lblCity" runat="server" Text="City: " Width="100px"></asp:Label>
-                <asp:TextBox ID="txtCity" runat="server" CssClass="longInputText"></asp:TextBox>
+                <asp:TextBox ID="txtCity" runat="server" CssClass="longInputText" required=""></asp:TextBox>
             </p>
             <p>
                 <asp:Label ID="lblStateAbb" runat="server" Text="State Abbreviation*: " Width="100px"></asp:Label>
@@ -45,29 +45,29 @@
             </p>
             <p>
                 <asp:Label ID="lblCountry" runat="server" Text="Country Abbreviation: " Width="100px"></asp:Label>
-                <asp:TextBox ID="txtCountry" runat="server" CssClass="shortInputText"></asp:TextBox>
+                <asp:TextBox ID="txtCountry" runat="server" CssClass="shortInputText" required=""></asp:TextBox>
             </p>
             <p>
                 <asp:Label ID="lblZip" runat="server" Text="Zip Code: " Width="100px"></asp:Label>
-                <asp:TextBox ID="txtZip" runat="server" CssClass="mediumInputText"></asp:TextBox>
+                <asp:TextBox ID="txtZip" runat="server" CssClass="mediumInputText" required=""></asp:TextBox>
             </p>
             <p>
                 &nbsp;</p>
             <p>
                 <asp:Label ID="lblHireDate" runat="server" Text="Hire Date: " Width="100px"></asp:Label>
-                <asp:TextBox placeholder="YYYY-MM-DD" ID="txtHireDate" runat="server" CssClass="mediumInputText"></asp:TextBox>
+                <asp:TextBox placeholder="YYYY-MM-DD" ID="txtHireDate" runat="server" CssClass="mediumInputText" require=""></asp:TextBox>
             </p>
             <p>
                 <asp:Label ID="lblTerminationDate" runat="server" Text="Termination Date*: " Width="100px"></asp:Label>
-                <asp:TextBox placeholder="YYYY-MM-DD" ID="txtTerminationDate" runat="server" CssClass="mediumInputText"></asp:TextBox>
+                <asp:TextBox placeholder="YYYY-MM-DD" ID="txtTerminationDate" runat="server" CssClass="mediumInputText" ></asp:TextBox>
             </p>
             <p>
                 <asp:Label ID="lblSalary" runat="server" Text="Salary: " Width="100px"></asp:Label>
-                <asp:TextBox placeholder="e.g. 45000" ID="txtSalary" runat="server" CssClass ="mediumInputText"></asp:TextBox>
+                <asp:TextBox placeholder="e.g. 45000" ID="txtSalary" runat="server" CssClass ="mediumInputText" required=""></asp:TextBox>
             </p>
             <p >
                 <asp:Label ID="lblManagerID" runat="server" Text="Manager ID*: " Width="100px"></asp:Label>
-                <asp:TextBox ID="txtManagerID" runat="server" CssClass="shortInputText"></asp:TextBox>
+                <asp:TextBox ID="txtManagerID" runat="server" CssClass="shortInputText" ></asp:TextBox>
             </p>
             <p >
                 <asp:Label ID="lblProjectSelection" runat="server" Text="Project: " Width="100px"></asp:Label>
@@ -108,8 +108,6 @@
                     <asp:BoundField DataField="EmployeeID" HeaderText="EmployeeID" InsertVisible="False" ReadOnly="True" SortExpression="EmployeeID" />
                     <asp:BoundField DataField="FirstName" HeaderText="FirstName" SortExpression="FirstName" />
                     <asp:BoundField DataField="LastName" HeaderText="LastName" SortExpression="LastName" />
-                    <asp:BoundField DataField="CountryAbb" HeaderText="CountryAbb" SortExpression="CountryAbb" />
-                    <asp:BoundField DataField="DateOfBirth" HeaderText="DateOfBirth" SortExpression="DateOfBirth" />
                     <asp:BoundField DataField="HireDate" HeaderText="HireDate" SortExpression="HireDate" />
                     <asp:BoundField DataField="TerminationDate" HeaderText="TerminationDate" SortExpression="TerminationDate" />
                     <asp:BoundField DataField="Salary" HeaderText="Salary" SortExpression="Salary" />
